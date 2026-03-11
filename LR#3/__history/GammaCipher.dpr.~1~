@@ -1,0 +1,114 @@
+program GammaCipher;
+
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils,
+  Windows;
+
+// Функция для установки кодировки консоли (для корректного отображения русского текста)
+procedure SetConsoleEncoding;
+begin
+  SetConsoleOutputCP(CP_UTF8);
+  SetConsoleCP(CP_UTF8);
+end;
+
+// Генератор псевдослучайных чисел (мультипликативный датчик)
+function NextGamma(var Y: Integer): Byte;
+const
+  A = 5;      // множитель
+  M = 4096;   // модуль
+begin
+  Y := (A * Y) mod M;
+  // Берем младший байт для гаммирования (0-255)
+  Result := Y and $FF;
+end;
+
+// Функция шифрования/дешифрования текста методом гаммирования
+function GammaCipher(const Input: string; var Y: Integer): string;
+var
+  i: Integer;
+  Gamma: Byte;
+  Ch: Byte;
+begin
+  Result := Input; // Копируем исходную строку
+  for i := 1 to Length(Result) do
+  begin
+    // Получаем следующий байт гаммы
+    Gamma := NextGamma(Y);
+
+    // Получаем код символа (для латиницы и кириллицы)
+    Ch := Byte(Result[i]);
+
+    // Применяем гаммирование (XOR)
+    Ch := Ch xor Gamma;
+
+    // Сохраняем зашифрованный/расшифрованный символ
+    Result[i] := Char(Ch);
+  end;
+end;
+
+// Вспомогательная функция для преобразования строки в HEX представление
+function StringToHex(const S: string): string;
+var
+  i: Integer;
+begin
+  Result := '';
+  for i := 1 to Length(S) do
+    Result := Result + IntToHex(Byte(S[i]), 2) + ' ';
+end;
+
+var
+  InputText: string;
+  EncryptedText: string;
+  DecryptedText: string;
+  Y: Integer;
+  InitialY: Integer;
+begin
+  try
+    // Устанавливаем кодировку консоли
+    SetConsoleEncoding;
+
+    // Начальные параметры генератора
+    InitialY := 4003; // Y0 = 4003
+    Y := InitialY;
+
+    Writeln('=== Шифрование методом гаммирования ===');
+    Writeln('Параметры генератора: a = 5, m = 4096, Y0 = 4003');
+    Writeln;
+
+    // Ввод текста
+    Write('Введите текст для шифрования: ');
+    Readln(InputText);
+
+    // Шифрование
+    Y := InitialY; // Сбрасываем генератор
+    EncryptedText := GammaCipher(InputText, Y);
+
+    Writeln;
+    Writeln('Результаты:');
+    Writeln('Исходный текст: ', InputText);
+    Writeln('Зашифрованный текст (в HEX): ', StringToHex(EncryptedText));
+    Writeln('Зашифрованный текст (как строка): ', EncryptedText);
+
+    // Дешифрование
+    Y := InitialY; // Сбрасываем генератор для дешифровки
+    DecryptedText := GammaCipher(EncryptedText, Y);
+
+    Writeln('Расшифрованный текст: ', DecryptedText);
+
+    // Проверка
+    if InputText = DecryptedText then
+      Writeln('Результат: УСПЕШНО (исходный и расшифрованный текст совпадают)')
+    else
+      Writeln('Результат: ОШИБКА (тексты не совпадают)');
+
+    Writeln;
+    Writeln('Нажмите Enter для выхода...');
+    Readln;
+
+  except
+    on E: Exception do
+      Writeln('Ошибка: ', E.Message);
+  end;
+end.
