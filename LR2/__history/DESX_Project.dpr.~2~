@@ -1,0 +1,15 @@
+program DESX_Project;
+
+uses
+  Forms,
+  MainUnit in '..\..\MainUnit.pas' {MainForm},
+  DESXUnit in '..\..\DESXUnit.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMainForm, MainForm);
+  Application.Run;
+end.

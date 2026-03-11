@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2026.03.02 17:56:22.397.pas,C:\Users\Ballisto0\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Ballisto0\Documents\RAD Studio\Projects\ZI\DESX_Project\MainUnit.pas</Transaction>
+    <Transaction>2026.03.02 17:56:22.397.dfm,C:\Users\Ballisto0\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Ballisto0\Documents\RAD Studio\Projects\ZI\DESX_Project\MainUnit.dfm</Transaction>
+    <Transaction>2026.03.02 17:56:29.709.dproj,C:\Users\Ballisto0\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Ballisto0\Documents\RAD Studio\Projects\ZI\DESX_Project\DESX_Project.dproj</Transaction>
+    <Transaction>2026.03.02 17:56:58.601.pas,C:\Users\Ballisto0\Documents\RAD Studio\Projects\ZI\DESX_Project\Unit1.pas=C:\Users\Ballisto0\Documents\RAD Studio\Projects\ZI\DESX_Project\DESXUnit.pas</Transaction>
+  </Transactions>
+</BorlandProject>

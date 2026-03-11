@@ -1,0 +1,58 @@
+unit MainUnit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, StdCtrls;
+
+type
+  TMainForm = class(TForm)
+    pcMain: TPageControl;
+    tsText: TTabSheet;
+    tsFiles: TTabSheet;
+    tsKeys: TTabSheet;
+    lblSource: TLabel;
+    memSource: TMemo;
+    lblEncrypted: TLabel;
+    memEncrypted: TMemo;
+    lblDecrypted: TLabel;
+    memDecrypted: TMemo;
+    btnEncryptString: TButton;
+    btnDecryptString: TButton;
+    gbSourceFile: TGroupBox;
+    edSourceFile: TEdit;
+    btnBrowseSource: TButton;
+    gbDestFile: TGroupBox;
+    edDestFile: TEdit;
+    btnBrowseDest: TButton;
+    btnEncryptFile: TButton;
+    btnDecryptFile: TButton;
+    ProgressBar1: TProgressBar;
+    gbKeys: TGroupBox;
+    lblKey1: TLabel;
+    edKey1: TEdit;
+    lblKey2: TLabel;
+    edKey2: TEdit;
+    lblKey3: TLabel;
+    edKey3: TEdit;
+    btnSetKeys: TButton;
+    btnGenerateRandomKeys: TButton;
+    lblKeyStatusTitle: TLabel;
+    lblKeyStatus: TLabel;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+end.
